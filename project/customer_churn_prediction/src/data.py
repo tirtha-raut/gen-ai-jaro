@@ -1,7 +1,15 @@
+from pathlib import Path
 import pandas as pd
 
 
-DATA_PATH = "data/processed/customer_churn_cleaned.csv"
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+DATA_PATH = (
+    BASE_DIR
+    / "data"
+    / "processed"
+    / "customer_churn_cleaned.csv"
+)
 
 
 def load_data():
