@@ -10,6 +10,20 @@ The analysis explores customer demographics, subscription details, billing behav
 
 ---
 
+## 🚀 Live Demo
+
+### Streamlit Dashboard:
+https://connecttel-customer-churn-prediction.streamlit.app/
+
+The interactive dashboard allows users to:
+
+- Explore customer churn patterns
+- Analyze churn across different customer segments
+- Compare churn rates by city, plan, and contract type
+- Enter customer details and predict churn probability
+- View model performance metrics
+- View the confusion matrix
+
 # Business Problem
 
 ConnectTel Communications has experienced a steady increase in customer churn despite continuous investments in network infrastructure, customer acquisition, and retention campaigns.
