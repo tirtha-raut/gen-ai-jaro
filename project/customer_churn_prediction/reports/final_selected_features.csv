@@ -1,0 +1,16 @@
+selected_feature
+num__customer_tenure_months
+num__network_drop_rate
+num__service_outages_last_6m
+num__late_payments_last_12m
+cat__gender_Female
+cat__gender_Male
+cat__customer_segment_Business
+cat__customer_segment_Consumer
+cat__customer_segment_Family
+cat__customer_segment_Premium
+cat__plan_type_Prepaid
+cat__plan_type_Unlimited
+cat__contract_type_1 Year
+cat__contract_type_2 Year
+cat__contract_type_Month-to-Month
