@@ -149,9 +149,7 @@ Feature Selection
                 ▼
        Streamlit Application
 
-## 7. Data Cleaning
-
-```markdown
+```
 ---
 
 ## 🧹 Data Cleaning
@@ -316,9 +314,7 @@ eval_metric = logloss
 random_state = 42
 n_jobs = -1
 
-## 14. Model Comparison
-
-```markdown
+```
 ---
 
 ## 📈 Model Comparison
@@ -351,7 +347,7 @@ Churn prediction
 
 ## 16. Model Evaluation Metrics
 
-```markdown
+```
 ---
 
 ## 📏 Model Evaluation Metrics
@@ -467,6 +463,7 @@ customer_churn_prediction/
 ├── app.py
 ├── requirements.txt
 └── README.md
+```
 ---
 
 ## 🚀 Running the Project
@@ -477,9 +474,7 @@ customer_churn_prediction/
 pip install -r requirements.txt
 streamlit run app.py
 
-## 21. Key Takeaways
-
-```markdown
+```
 ---
 
 ## 📌 Key Takeaways
