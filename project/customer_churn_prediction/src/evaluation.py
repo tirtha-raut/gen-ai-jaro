@@ -1,3 +1,7 @@
+from pathlib import Path
+
+import joblib
+
 from sklearn.model_selection import train_test_split
 
 from sklearn.metrics import (
@@ -11,7 +15,54 @@ from sklearn.metrics import (
 import streamlit as st
 import plotly.express as px
 
-def evaluate_model(model, df):
+
+# ---------------------------------------------------------
+# Paths
+# ---------------------------------------------------------
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+PREPROCESSOR_PATH = (
+    BASE_DIR
+    / "models"
+    / "preprocessor.pkl"
+)
+
+FEATURE_SELECTOR_PATH = (
+    BASE_DIR
+    / "models"
+    / "feature_selector.pkl"
+)
+
+
+# ---------------------------------------------------------
+# Load preprocessing objects
+# ---------------------------------------------------------
+
+def load_preprocessor():
+
+    return joblib.load(
+        PREPROCESSOR_PATH
+    )
+
+
+def load_feature_selector():
+
+    return joblib.load(
+        FEATURE_SELECTOR_PATH
+    )
+
+
+# ---------------------------------------------------------
+# Evaluate model
+# ---------------------------------------------------------
+
+def evaluate_model(
+    model,
+    df,
+    preprocessor,
+    feature_indices
+):
 
     X = df.drop(
         columns=["churn_flag"]
@@ -27,10 +78,33 @@ def evaluate_model(model, df):
         stratify=y
     )
 
-    y_pred = model.predict(X_test)
+    # --------------------------------------------------------
+    # PREPROCESS
+    # --------------------------------------------------------
+
+    X_test_processed = preprocessor.transform(
+        X_test
+    )
+
+    # --------------------------------------------------------
+    # APPLY BEST FEATURE SELECTION
+    # --------------------------------------------------------
+
+    X_test_selected = X_test_processed[
+        :,
+        feature_indices
+    ]
+
+    # --------------------------------------------------------
+    # PREDICT
+    # --------------------------------------------------------
+
+    y_pred = model.predict(
+        X_test_selected
+    )
 
     y_probability = model.predict_proba(
-        X_test
+        X_test_selected
     )[:, 1]
 
     metrics = {
@@ -62,18 +136,29 @@ def evaluate_model(model, df):
 
     return metrics, cm
 
-def show_evaluation(model, df):
+# ---------------------------------------------------------
+# Streamlit evaluation page
+# ---------------------------------------------------------
+
+def show_evaluation(
+    model,
+    df,
+    preprocessor,
+    feature_indices
+):
 
     st.header("🤖 Model Performance")
 
     st.write(
-        "Performance of the Logistic Regression model "
+        "Performance of the XGBoost model "
         "on the test dataset."
     )
 
     metrics, cm = evaluate_model(
         model,
-        df
+        df,
+        preprocessor,
+        feature_indices
     )
 
     st.divider()
